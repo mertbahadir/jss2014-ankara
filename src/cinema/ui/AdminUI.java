@@ -6,9 +6,14 @@ import java.util.Scanner;
 
 import cinema.model.Theater;
 
-public class AdminUI {
+public class AdminUI extends AbstractUI {
 	
 	public static void main(String[] args) {
+		AdminUI ui = new AdminUI();
+		ui.runMainLoop();
+	}
+
+	private void runMainLoop() {
 		Scanner scanner = new Scanner(System.in);
 		String line = "";
 		Collection<Theater> theaters = new ArrayList<>();
@@ -28,7 +33,7 @@ public class AdminUI {
 		}
 	}
 	
-	private static void addTheater(Scanner scanner, Collection<Theater> theaters){
+	private void addTheater(Scanner scanner, Collection<Theater> theaters){
 		System.out.println("Enter a theater in the following format:");
 		System.out.println("name, rows, cols");
 		String line = scanner.nextLine();
@@ -40,19 +45,13 @@ public class AdminUI {
 		theaters.add(theater);
 	}
 	
-	private static void listTheaters(Collection<Theater> theaters){
-		for (Theater theater : theaters) {
-			System.out.println(theater.getName()+": "+theater.getRows()+"x"+theater.getCols());
-		}
-	}
-	
-	private static String showMenuAndGetSelection(Scanner scanner){
+	@Override
+	protected void showMenu() {
 		System.out.println();
 		System.out.println("Please make a selection:");
 		System.out.println("1. List theatres");
 		System.out.println("2. Add theatre");
 		System.out.println("q. Quit");
-		return scanner.nextLine();
 	}
 
 }
